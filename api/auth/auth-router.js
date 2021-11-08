@@ -1,5 +1,10 @@
 const router = require('express').Router()
+const {
+checkPasswordLength,
+checkUsernameExists,
+checkUsernameFree,
 
+} = require('./auth-middleware')
 
 /**
   1 [POST] /api/auth/register { "username": "sue", "password": "1234" }
@@ -23,7 +28,7 @@ const router = require('express').Router()
     "message": "Password must be longer than 3 chars"
   }
  */
-router.post('/register', (req, res, rext) =>{
+router.post('/register', checkPasswordLength, checkUsernameFree, (req, res, rext) =>{
   res.json('register')
 })
 
@@ -43,7 +48,7 @@ router.post('/register', (req, res, rext) =>{
   }
  */
 
-  router.post('/login', (req, res, rext) =>{
+  router.post('/login', checkUsernameExists, (req, res, rext) =>{
     res.json('login')
   })
 /**
