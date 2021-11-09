@@ -34,7 +34,19 @@ router.post('/register', checkPasswordLength, checkUsernameFree, (req, res, next
   })
 
   router.post('/logout', (req, res, next) =>{
-    res.json('logout')
+   if (req.session.user) {
+    req.session.destroy(error => {
+      if (error) {
+        next(error)
+      } else {
+        res.json({ message: 'logged out'})
+      }
+    })
+   } else {
+     res.json({
+       message: 'no session'
+     })
+   }
   })
  
 
