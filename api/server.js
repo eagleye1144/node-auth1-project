@@ -11,7 +11,7 @@ const server = express();
 
 server.use(session({
   name: 'chocolatechip',
-  sercret: 'shh',
+  secret: 'shh',
   saveUninitialized: false,
   resave: false,
   store: new Store({
