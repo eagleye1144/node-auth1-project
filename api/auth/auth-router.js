@@ -33,7 +33,7 @@ router.post('/register', checkPasswordLength, checkUsernameFree, (req, res, next
     }
   })
 
-  router.post('/logout', (req, res, next) =>{
+  router.get('/logout', (req, res, next) =>{
    if (req.session.user) {
     req.session.destroy(error => {
       if (error) {
