@@ -18,7 +18,7 @@ async function checkUsernameFree(req, res, next) {
       next()
     }
     else {
-      next({"message": "Username taken", status: 422})
+      next({message: "Username taken", status: 422})
     }
   } catch (error) {
     next(error)
@@ -29,12 +29,12 @@ async function checkUsernameFree(req, res, next) {
 async function checkUsernameExists(req, res, next) {
   try {
     const users = await User.findBy({username: req.body.username})
-    if (!users.length) {
+    if (users.length) {
       req.user = users[0]
       next()
     }
     else {
-      next({"message": "Invalid credentials", status: 401})
+      next({ message: "Invalid credentials", status: 401})
     }
   } catch (error) {
     next(error)
